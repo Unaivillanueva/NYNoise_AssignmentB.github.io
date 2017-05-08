@@ -1,4 +1,4 @@
-const w_graphs = 800,
+const w_graphs = window.innerWidth / 2 - 100,
       h_graphs = 500,
       margin_graphs = {top: 0, right: 20, bottom: 20, left: 200};
 

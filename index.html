@@ -140,11 +140,11 @@
                     <p>Union Turnpike has received an incredible amount of noise complaints during the past years; two times more than any other in the city, most of them being noisy alarm complaints. This seems weird taking into account that it looks like a quite peaceful neighborhood in Queens.</p>
                     <p>If taken a look in the following heat map, a certain point within the zone can be noticed.</p>
      
-                    <div id="cf" style="margin-left: -30px;" >
-                      <img class="top" src="noise_heat.png" />
+                    <div id="cf" style="width: 100%" >
+                      <img class="top" src="noise_heat.png" style="display: block; margin: 0 auto;"/>
                     </div>
                     
-                    <p>Exploring the data in more detail reveals that all of the complints come from a single address in Union Turnpike that correspond to the <a href="http://www.firedepartment.net/directory/new-york/queens-county/flushing/new-york-fire-department-engine-315-ladder-125-queens">Fire Brigade</a> in that street.</p>
+                    <p>Exploring the data in more detail reveals that all of the complaints come from a single address in Union Turnpike that correspond to the <a href="http://www.firedepartment.net/directory/new-york/queens-county/flushing/new-york-fire-department-engine-315-ladder-125-queens">Fire Brigade</a> in that street.</p>
                     
                     <iframe src="https://www.google.com/maps/embed?pb=!1m0!3m2!1ses!2sdk!4v1493568503154!6m8!1m7!1spKOPmViUIpKDB7aVg3d8_A!2m2!1d40.72034449049819!2d-73.8078764853647!3f141.80003234336525!4f-5.680241702150838!5f0.7820865974627469" width="800" height="600" frameborder="0" style="border:0; margin-left: -30px;" allowfullscreen></iframe>
                     
@@ -152,7 +152,7 @@
                     <p> In conclusion, we can't really know if the huge number of noise pollution complaints are based on something that actually happened, or it's just something that is wrong with the data we used. However, due to the difficulty to find any relevant news, supporting data or information when contacting the surrounding buildings we are inclined to think that it is in fact corrupt data.</p>
 
                     <h2 class="section-heading" id="predictions">Predicting new cases</h2>
-                    <p>After seeing what's been going on during the past years, let's see if we can make some predictions based on the data we have. First we will take a look that 3 of the most important categories, since those are the types that have cought our attention the most. We can map future cases of these incidents based on a KN model.</p>
+                    <p>After seeing what's been going on during the past years, let's see if we can make some predictions based on the data we have. First we will take a look that 3 of the most important categories, since those are the types that have cought our attention the most. We can map future cases of these incidents based on a KNN model.</p>
 
                     <button class='but1_neig' onclick="document.getElementById('map1').src='KNN5.png'">k=5</button>
                     <button class='but1_neig'onclick="document.getElementById('map1').src='KNN10.png'">k=10</button>
