@@ -379,7 +379,7 @@ const displayGraph4 = (fileName, attributeAccessor, svgGroup, parentDiv, color, 
                     .style("left", d3.event.pageX - 450 + "px")
                     .style("top", d3.event.pageY - 550 + "px")
                     .style("display", "inline-block")
-                    .html((d.type) + "<br>" + (d.number) + " complaints");
+                    .html((d.number) + " complaints");
             })
             .on("mouseout", function(d){
                 d3.select(this)
