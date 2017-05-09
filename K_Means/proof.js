@@ -112,7 +112,7 @@ d3.json('K_Means/kmeans.json', data => {
                     elem.attr('r', radius_cen)
                 });
     }
-    Array.from(document.getElementsByTagName('button')).forEach(btn => {
+    Array.from(document.getElementsByClassName('kmeans_but')).forEach(btn => {
         btn.onclick = () => toggle(btn.dataset.val);
     });
 
