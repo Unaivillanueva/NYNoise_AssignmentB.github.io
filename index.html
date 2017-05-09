@@ -24,7 +24,7 @@
     <link href="css/heat_map.css" rel="stylesheet">
     <link rel="stylesheet" href="K_Means/proof.css"/>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.36.0/mapbox-gl.css' rel='stylesheet' />
-    <link rel="stylesheet" type="text/css" href="css/kmeans.css">
+    
 
 
     <!-- Custom Fonts -->
@@ -159,6 +159,9 @@
                     <button class='but1_neig'onclick="document.getElementById('map1').src='KNN30.png'">k=30</button>
                     <img id='map1' align="left" src='KNN5.png' style="width: 900px; height: 700px; margin-top: 10px; margin-bottom: 80px; margin-left: 0px; "></img>
              
+                    <h2 class="section-heading" id="predictions">Unsupervised learning: K-Means</h2>
+                    <p>Now we can have a look to the clustering made by using the algorithm of K-means. We have chosen 5 k-means to toogle around with. Therefore, we have clustered the data of the amount of noise complaints, respectively, in 2,3,4,5 and 6 clusters.</p>
+             
 
                      <div id='controls' style="clear: both">
                         <button class="kmeans_but" data-val='2'>k = 2</button>
@@ -176,7 +179,7 @@
                     <!--buttons for the score graph-->
                     <button id="button8020" class="myButton">80% - 20%</button>
                     <button id="button9010" class="myButton">90% - 10%</button>
-                    <button id="button9505" class="myButton">95/ - 5%</button>
+                    <button id="button9505" class="myButton">95% - 5%</button>
 
                     <div id='v_scores' style="width: 900px; height: 500px; margin-top: 30px; margin-bottom: 50px; margin-left: 0px; "> 
                     
