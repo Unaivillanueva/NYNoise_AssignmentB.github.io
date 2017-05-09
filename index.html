@@ -102,27 +102,25 @@
             <div class="row">
                 <div class="col-md-6 col-md-offset-3">
                     <h2 class="section-heading" id="motivation">Our motivation</h2>
-                    <p>New York city has been for a long time called "The city that never sleeps". Some say that this is due to its incredible night life, the fact the subways don't close at night or because even at 3am you can still take a ferry around the New York Harbor. However, the city has also received numerous noise pollution complaints to the Department of Environmental Pollution during the past years. With this information we wondered if the reason why there are some many people around at any time is because the city doesn't let them sleep. In this page, we are going to analyse the different reasons why people complain about noise, where those happen and see if there any interesting facts around the noise in New York city.</p>
+                    <p>New York city has been for a long time called "The city that never sleeps". Some say that this is due to its incredible night life, the fact the subways don't close at night or because even at 3am you can still take a ferry around the New York Harbor. However, the city has also received numerous noise pollution complaints to the Department of Environmental Pollution during the past years. With this information we wondered if the reason why there are so many people around at any time is because the city doesn't let them sleep. In this page, we are going to analyse the different reasons why people complain about noise, where those happen and see if there any interesting facts around the noise in New York city.</p>
 
                     <h2 class="section-heading" id="dataset">Our dataset</h2>
 
-                    <p>The data we are going to analyse in this project consists of a 61 MB CSV file, that you can find <a href="https://data.cityofnewyork.us/Social-Services/Noise-SRs-since-20151101/fqi4-uxkk">here</a>. The file contains 82294 rows and 53 columns of data that range from 2015 to 2017 including different categories of noise, locations, dates and complaint creation times among others. A more detailed data analysis a links to the used data files can be found in our explainer <a href="https://nbviewer.jupyter.org/github/socialdataassignment2/NYNoise_AssignmentB.github.io/blob/master/Project%20Assignment%20B.ipynb">iPython Notebook</a>.</p>
+                    <p>The data we are going to analyse in this project consists of a 61 MB CSV file, that you can find <a href="https://data.cityofnewyork.us/Social-Services/Noise-SRs-since-20151101/fqi4-uxkk">here</a>. The file contains 82294 rows and 53 columns of data that range from 2015 to 2017 including different categories of noise, locations, dates and complaint creation times among others. A more detailed data analysis and the used data files can be found in our explainer <a href="https://nbviewer.jupyter.org/github/socialdataassignment2/NYNoise_AssignmentB.github.io/blob/master/Project%20Assignment%20B.ipynb">iPython Notebook</a>.</p>
 
                      <h2 class="section-heading" id="understanting">Understanding the data</h2>
                      <p>Let's start by visualizing some of the basic stats of our data.</p>
                      <h3>Why do people complain?</h3>
+                     <p>Firslty, we wanted to analyze why does people complain about noises or more specifically, which noises made people complain the most. In the following graphs, we can see the amount of complaints depending on the types of noises and also, depending in the neighborhoods, respectively.</p>
                      
                         <div id="v_types_complaints" ></div>
                         <div id="v_zones_complaints" ></div>
                      
-                     <p>Taking a look at some basics stats it can be easily seen that some noise types are by far more usual than others. This is the case for construction noises in its two different categories. There is also a significant amount of complaints pointing at barking dogs. The rest of the types have significantly lower occurrences. However, as it will shown later, the origin of some of these complaints like Alarms is important and can be originated from only one source.</p>
+                     <p>Taking a look at some basics stats it can be easily seen that some noise types are by far more usual than others. This is the case for <em><b>construction noises</b></em> in its two different categories. There is also a significant amount of complaints pointing at <em><b>barking dogs</b></em>. The rest of the types have significantly lower occurrences. However, as it will be shown later, the origin of some of these complaints like <em><b>Alarms</b></em> is important and can be originated from only one source.</p>
                      <p>Regarding the number of complaints distributed by street some interesting things begin to show up. The main source is Union Turnpike, a street located in Queens. This is quite an interesting fact taking into account that most of the rest of the streets here are located in the center of Manhattan.</p>
                      
                         <div id="v_time_complaints" ></div>
                         <div id="v_month_complaints" ></div>
-                     
-                     <p>Talk about cycles when done</p>
-
                      
                      <p>However, a lot of these numbers don't say a lot without any context. Bellow we can see with more detail the number of complaints on each zone of the city by category and month of the year.
 
@@ -135,7 +133,7 @@
                     <p>Setting the noise type to Noise: Alarms and sliding through the months of the years it is really noticable that something is going on in a certain zone in Queens.</p>
 
                     <h3>Curious cases</h3>
-                    <p>The initial exploration showed that Alarm Noise complaints in a neighborhood called Union Turnpike seem to be specially high. In order to find out if this is relevant or just corrupt data a deeper look at it is needed.</p>
+                    <p>The initial exploration showed that <em><b>alarm</b></em> noise complaints in a neighborhood called <em><b>Union Turnpike</b></em> seem to be specially high. In order to find out if this is relevant or just corrupt data a deeper look at it is needed.</p>
                     <h4>Union Turnpike Case</h4>
                     <p>Union Turnpike has received an incredible amount of noise complaints during the past years; two times more than any other in the city, most of them being noisy alarm complaints. This seems weird taking into account that it looks like a quite peaceful neighborhood in Queens.</p>
                     <p>If taken a look in the following heat map, a certain point within the zone can be noticed.</p>
@@ -157,6 +155,9 @@
                     <button class='but1_neig' onclick="document.getElementById('map1').src='KNN5.png'">k=5</button>
                     <button class='but1_neig'onclick="document.getElementById('map1').src='KNN10.png'">k=10</button>
                     <button class='but1_neig'onclick="document.getElementById('map1').src='KNN30.png'">k=30</button>
+
+                    <p><em>Legend:  <font color="green">  *Construction</font> <font color="red">  *Barking dogs</font> <font color="blue">  *Alarms</font></em></p>
+       
                     <img id='map1' align="left" src='KNN5.png' style="width: 900px; height: 700px; margin-top: 10px; margin-bottom: 80px; margin-left: 0px; "></img>
              
                     <h2 class="section-heading" id="predictions">Unsupervised learning: K-Means</h2>
@@ -174,7 +175,7 @@
 
                     <div id='v_map2' style="margin-left: 0px; margin-top: 30px;"></div>
 
-                    <p>However, using a K Neighbours model might not be the best option in this case. Therefore, we have tried and evaluated different models and compared their scores.</p>
+                    <p>However, using a K Neighbours or K Means model might not be the best option in this case. Therefore, we have tried and evaluated different models and compared their scores.</p>
                     <p>Select the train/test split you want to see:</p>
                     <!--buttons for the score graph-->
                     <button id="button8020" class="myButton">80% - 20%</button>
@@ -187,7 +188,7 @@
                     
                     <p>It is interesting to see that none of the models give a great accuracy, even with different train/test percentages and train features. The highest one we can obtain is a 54.86% accuracy using a Decision Tree and only the street name as a train feature. This is probably due to the fact that our data isn't big or varied enough to contemplate all the different possibilities.</p>
 
-                   <h3 style="margin-bottom: 100px;">Thank you for reading!</h3>
+                   <h3 style="margin-bottom: 100px; margin-top: 50px;">Thank you for reading!</h3>
 
                    <h3>Appendix</h3>
                    <h4>Links:</h4>
