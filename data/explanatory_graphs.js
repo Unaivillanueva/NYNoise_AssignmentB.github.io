@@ -1,10 +1,14 @@
-const w_graphs = 1000,
+const w_graphs = 900,
       h_graphs = 600,
       margin_graphs = {top: 20, right: 20, bottom: 20, left: 180};
 
 const w_graphs2 = 900,
-      h_graphs2 = 600,
-      margin_graphs2 = {top: 20, right: 20, bottom: 50, left: 50};
+      h_graphs2 = 500,
+      margin_graphs2 = {top: 50, right: 20, bottom: 60, left: 50};
+
+const w_graphs4 = 900,
+      h_graphs4 = 500,
+      margin_graphs4 = {top: 50, right: 20, bottom: 20, left: 50};
 
 const svg_types = d3.select('#v_types_complaints').append('svg')
                     .attr("width", w_graphs )
@@ -40,7 +44,11 @@ var tip_exp = d3.tip()
   .html(function(d) {
     return (d.type) + "<br>" + (d.number) + " complaints";
   })
-svg_types.call(tip_exp);
+svg_types.call(tip_exp)
+
+
+
+
 const displayGraph1 = (fileName, attributeAccessor, svgGroup, parentDiv, color, colorHover) => {
     d3.csv(fileName, data => {
         let tooltip = d3.select(parentDiv).append("div").attr("class","toolTip");
@@ -105,29 +113,38 @@ const displayGraph2 = (fileName, attributeAccessor, svgGroup, parentDiv, color, 
         let x_graphs = d3.scaleBand().range([0, w_graphs2 - margin_graphs2.right - margin_graphs2.left]);
         data = data.map(e => ({type: e[attributeAccessor], number: parseInt(e.number)}));
         //data.sort((a, b) =>  a.number - b.number);
-
-        /*// for parsing and formatting
-        var timeFormat = d3.timeFormat("%H:%M");
-        var x = d3.map(data, function(d) {
-                return timeFormat(d.type);
-        });*/
-
         y_graphs.domain([0, d3.max(data, d => d.number)]);
         x_graphs.domain(data.map(d => d.type)).padding(0.1);
 
-        console.log(data);
+        var time = [0, 1, 2, 3, 4 ,5 ,6 ,7 ,8 ,9, 10, 11, 12, 13 ,14 ,15, 16, 17, 18, 19,
+        20, 21, 22, 23, 24]
 
-        svgGroup.append("g")
+        var x = d3.scaleBand().range([0, w_graphs2 - margin_graphs2.right-20]);
+       
+        var xAxis = d3.axisBottom()
+            .scale(x);
+
+         x.domain(time.map(function(d) { return d; }));
+
+         svgGroup.append("g")
+              .attr("class", "x axis")
+              .attr("transform", `translate(0, ${h_graphs2 - margin_graphs2.bottom - 40})`)
+              .call(xAxis)
+            .selectAll("text")
+              .style("text-anchor", "end")
+              .attr("dx", "-.8em")
+              .attr("dy", "-.55em")
+              .attr("transform", "rotate(0)" );
+       
+        /*svgGroup.append("g")
             .attr("class", "x axis")
             .attr("transform", `translate(0, ${h_graphs2 - margin_graphs2.top - margin_graphs2.bottom})`)
-            .call(d3.axisBottom(x_graphs)
-                    .ticks(d3.timeMinute.every(60)));
-            
+            .call(d3.axisBottom(x_graphs).ticks(1));*/
+                      
         
         svgGroup.append("g")
             .attr("class", "y axis")
             .call(d3.axisLeft(y_graphs).ticks(5).tickFormat(d => parseInt(d)).tickSizeInner([-(h_graphs2)]));
-        
 
         svgGroup.selectAll('rect')
             .data(data)
@@ -137,7 +154,7 @@ const displayGraph2 = (fileName, attributeAccessor, svgGroup, parentDiv, color, 
             .attr('width', x_graphs.bandwidth())
             .attr('x', d => x_graphs(d.type))
             .attr('height', d => h_graphs2 - margin_graphs2.top - margin_graphs2.bottom - y_graphs(d.number))
-            .style('fill', color)
+             .style('fill', color)
             .on("mouseover", function(d){
                 d3.select(this)
                     .transition()
@@ -159,19 +176,18 @@ const displayGraph2 = (fileName, attributeAccessor, svgGroup, parentDiv, color, 
                 tooltip.style("display", "none");
             }); 
 
-         // text label for the x axis
-        svgGroup.append("text")             
+            svgGroup.append("text")             
             .attr("transform",
-                    "translate(" + (w_graphs2 + 100 + "px")+" ," + 
-                           (h_graphs2 + margin_graphs2 +"px") + ")")
+                    "translate(" + (w_graphs2)+" ," + 
+                           (h_graphs2 + margin_graphs2) + ")")
             .style("text-anchor", "right")
             .style("font-family", "Arial")
             .text("Noise Complaints per Hour");
     })
 }
 
-const displayGraph3 = (fileName, attributeAccessor, svgGroup, parentDiv, color, colorHover) => {
-    d3.csv(fileName, data => {
+const displayGraph4 = (fileName, attributeAccessor, svgGroup, parentDiv, color, colorHover) => {
+   d3.csv(fileName, data => {
         let tooltip = d3.select(parentDiv).append("div").attr("class","toolTip");
         let y_graphs = d3.scaleLinear().range([h_graphs2 - margin_graphs2.top - margin_graphs2.bottom,0]);
         let x_graphs = d3.scaleBand().range([0, w_graphs2 - margin_graphs2.right - margin_graphs2.left]);
@@ -179,19 +195,16 @@ const displayGraph3 = (fileName, attributeAccessor, svgGroup, parentDiv, color, 
         //data.sort((a, b) =>  a.number - b.number);
         y_graphs.domain([0, d3.max(data, d => d.number)]);
         x_graphs.domain(data.map(d => d.type)).padding(0.1);
-
-        console.log(data);
-
+       
         svgGroup.append("g")
             .attr("class", "x axis")
             .attr("transform", `translate(0, ${h_graphs2 - margin_graphs2.top - margin_graphs2.bottom})`)
-            .call(d3.axisBottom(x_graphs).ticks(1))
-            ;
+            .call(d3.axisBottom(x_graphs).ticks(1));
+                      
         
         svgGroup.append("g")
             .attr("class", "y axis")
             .call(d3.axisLeft(y_graphs).ticks(5).tickFormat(d => parseInt(d)).tickSizeInner([-(h_graphs2)]));
-        
 
         svgGroup.selectAll('rect')
             .data(data)
@@ -201,7 +214,7 @@ const displayGraph3 = (fileName, attributeAccessor, svgGroup, parentDiv, color, 
             .attr('width', x_graphs.bandwidth())
             .attr('x', d => x_graphs(d.type))
             .attr('height', d => h_graphs2 - margin_graphs2.top - margin_graphs2.bottom - y_graphs(d.number))
-            .style('fill', color)
+             .style('fill', color)
             .on("mouseover", function(d){
                 d3.select(this)
                     .transition()
@@ -223,11 +236,10 @@ const displayGraph3 = (fileName, attributeAccessor, svgGroup, parentDiv, color, 
                 tooltip.style("display", "none");
             }); 
 
-        // text label for the x axis
-        svgGroup.append("text")             
+            svgGroup.append("text")             
             .attr("transform",
-                    "translate(" + (w_graphs2 + 100 + "px")+" ," + 
-                           (h_graphs2 + margin_graphs2 +"px") + ")")
+                    "translate(" + (w_graphs2)+" ," + 
+                           (h_graphs2 + margin_graphs2) + ")")
             .style("text-anchor", "right")
             .style("font-family", "Arial")
             .text("Noise Complaints per Month");
@@ -235,7 +247,8 @@ const displayGraph3 = (fileName, attributeAccessor, svgGroup, parentDiv, color, 
 }
 
 
+
 displayGraph1('data/noise_types.csv', 'type', g_types, '#v_types_complaints', '#FF3D0D', '#ffa02b');
 displayGraph1('data/noise_zones.csv', 'zone',  g_zones, '#v_zones_complaints', '#FF3D0D', '#ffa02b');
 displayGraph2('data/noise_time.csv', 'time', g_time, '#v_time_complaints', '#99ccff', '#FF3D0D');
-displayGraph3('data/noise_month.csv', 'month', g_month, '#v_month_complaints', '#99ccff', '#FF3D0D');
+displayGraph4('data/noise_month.csv', 'month', g_month, '#v_month_complaints', '#99ccff', '#FF3D0D');
