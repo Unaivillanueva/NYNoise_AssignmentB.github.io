@@ -1,10 +1,10 @@
-const w_graphs = 900,
+const w_graphs = 1000,
       h_graphs = 600,
-      margin_graphs = {top: 0, right: 20, bottom: 20, left: 200};
+      margin_graphs = {top: 20, right: 20, bottom: 20, left: 180};
 
 const w_graphs2 = 900,
       h_graphs2 = 600,
-      margin_graphs2 = {top: 0, right: 20, bottom: 20, left: 50};
+      margin_graphs2 = {top: 20, right: 20, bottom: 20, left: 50};
 
 const svg_types = d3.select('#v_types_complaints').append('svg')
                     .attr("width", w_graphs )
@@ -44,8 +44,8 @@ svg_types.call(tip_exp);
 const displayGraph1 = (fileName, attributeAccessor, svgGroup, parentDiv, color, colorHover) => {
     d3.csv(fileName, data => {
         let tooltip = d3.select(parentDiv).append("div").attr("class","toolTip");
-        let x_graphs = d3.scaleLinear().range([0, w_graphs]);
-        let y_graphs = d3.scaleBand().range([h_graphs, 0]);
+        let x_graphs = d3.scaleLinear().range([0,w_graphs - margin_graphs.right - margin_graphs.left, 0]);
+        let y_graphs = d3.scaleBand().range([h_graphs - margin_graphs.top - margin_graphs.bottom, 0]);
         data = data.map(e => ({type: e[attributeAccessor], number: parseInt(e.number)}));
         data.sort((a, b) =>  a.number - b.number);
         x_graphs.domain([0, d3.max(data, d => d.number)]);
@@ -101,8 +101,8 @@ const displayGraph1 = (fileName, attributeAccessor, svgGroup, parentDiv, color, 
 const displayGraph2 = (fileName, attributeAccessor, svgGroup, parentDiv, color, colorHover) => {
     d3.csv(fileName, data => {
         let tooltip = d3.select(parentDiv).append("div").attr("class","toolTip");
-        let y_graphs = d3.scaleLinear().range([h_graphs2 - margin_graphs2.top - margin_graphs2.bottom, 0]);
-        let x_graphs = d3.scaleBand().range([h_graphs2 - margin_graphs2.top - margin_graphs2.bottom, 0]);
+        let y_graphs = d3.scaleLinear().range([h_graphs2 - margin_graphs2.top - margin_graphs2.bottom,0]);
+        let x_graphs = d3.scaleBand().range([0, w_graphs2 - margin_graphs2.right - margin_graphs2.left]);
         data = data.map(e => ({type: e[attributeAccessor], number: parseInt(e.number)}));
         //data.sort((a, b) =>  a.number - b.number);
         y_graphs.domain([0, d3.max(data, d => d.number)]);
@@ -113,7 +113,7 @@ const displayGraph2 = (fileName, attributeAccessor, svgGroup, parentDiv, color, 
         svgGroup.append("g")
             .attr("class", "x axis")
             .attr("transform", `translate(0, ${h_graphs2 - margin_graphs2.top - margin_graphs2.bottom})`)
-            .call(d3.axisBottom(x_graphs).ticks(5))
+            .call(d3.axisBottom(x_graphs).ticks(1))
             ;
         
         svgGroup.append("g")
