@@ -1,6 +1,10 @@
-const w_graphs = window.innerWidth / 2 - 100,
-      h_graphs = 500,
+const w_graphs = 900,
+      h_graphs = 600,
       margin_graphs = {top: 0, right: 20, bottom: 20, left: 200};
+
+const w_graphs2 = 900,
+      h_graphs2 = 600,
+      margin_graphs2 = {top: 0, right: 20, bottom: 20, left: 50};
 
 const svg_types = d3.select('#v_types_complaints').append('svg')
                     .attr("width", w_graphs )
@@ -17,18 +21,18 @@ const svg_zones = d3.select('#v_zones_complaints').append('svg')
 const g_zones = svg_zones.append('g').attr("transform", `translate(${margin_graphs.left}, ${margin_graphs.top})`);
 
 const svg_time = d3.select('#v_time_complaints').append('svg')
-                    .attr("width", w_graphs )
-                    .attr("height", h_graphs )
+                    .attr("width", w_graphs2 )
+                    .attr("height", h_graphs2 )
                     .style("margin", "15px")
                     .style("background-color","#F1F3F3")
-const g_time = svg_time.append('g').attr("transform", `translate(${margin_graphs.left}, ${margin_graphs.top})`);
+const g_time = svg_time.append('g').attr("transform", `translate(${margin_graphs2.left}, ${margin_graphs2.top})`);
 
 const svg_month = d3.select('#v_month_complaints').append('svg')
-                    .attr("width", w_graphs )
-                    .attr("height", h_graphs )
+                    .attr("width", w_graphs2 )
+                    .attr("height", h_graphs2 )
                     .style("margin", "15px")
                     .style("background-color","#F1F3F3")
-const g_month = svg_month.append('g').attr("transform", `translate(${margin_graphs.left}, ${margin_graphs.top})`);
+const g_month = svg_month.append('g').attr("transform", `translate(${margin_graphs2.left}, ${margin_graphs2.top})`);
 
 var tip_exp = d3.tip()
   .attr('class', 'd3-tip')
@@ -40,8 +44,8 @@ svg_types.call(tip_exp);
 const displayGraph1 = (fileName, attributeAccessor, svgGroup, parentDiv, color, colorHover) => {
     d3.csv(fileName, data => {
         let tooltip = d3.select(parentDiv).append("div").attr("class","toolTip");
-        let x_graphs = d3.scaleLinear().range([0, w_graphs - margin_graphs.left - margin_graphs.right]);
-        let y_graphs = d3.scaleBand().range([h_graphs - margin_graphs.top - margin_graphs.bottom, 0]);
+        let x_graphs = d3.scaleLinear().range([0, w_graphs]);
+        let y_graphs = d3.scaleBand().range([h_graphs, 0]);
         data = data.map(e => ({type: e[attributeAccessor], number: parseInt(e.number)}));
         data.sort((a, b) =>  a.number - b.number);
         x_graphs.domain([0, d3.max(data, d => d.number)]);
@@ -74,8 +78,8 @@ const displayGraph1 = (fileName, attributeAccessor, svgGroup, parentDiv, color, 
                     .style('fill', color)
 
                 tooltip
-                    .style("left",d3.select(this).attr("cx") + "px")
-                    .style("top",d3.select(this).attr("y") + "px")
+                    .style("left", d3.event.pageX - 450 + "px")
+                    .style("top", d3.event.pageY - 550 + "px")
                     .style("display", "inline-block")
                     .html((d.type) + "<br>" + (d.number) + " complaints");
 
@@ -97,8 +101,8 @@ const displayGraph1 = (fileName, attributeAccessor, svgGroup, parentDiv, color, 
 const displayGraph2 = (fileName, attributeAccessor, svgGroup, parentDiv, color, colorHover) => {
     d3.csv(fileName, data => {
         let tooltip = d3.select(parentDiv).append("div").attr("class","toolTip");
-        let y_graphs = d3.scaleLinear().range([h_graphs - margin_graphs.top - margin_graphs.bottom, 0]);
-        let x_graphs = d3.scaleBand().range([0, w_graphs - margin_graphs.left - margin_graphs.right]);
+        let y_graphs = d3.scaleLinear().range([h_graphs2 - margin_graphs2.top - margin_graphs2.bottom, 0]);
+        let x_graphs = d3.scaleBand().range([h_graphs2 - margin_graphs2.top - margin_graphs2.bottom, 0]);
         data = data.map(e => ({type: e[attributeAccessor], number: parseInt(e.number)}));
         //data.sort((a, b) =>  a.number - b.number);
         y_graphs.domain([0, d3.max(data, d => d.number)]);
@@ -108,13 +112,13 @@ const displayGraph2 = (fileName, attributeAccessor, svgGroup, parentDiv, color, 
 
         svgGroup.append("g")
             .attr("class", "x axis")
-            .attr("transform", `translate(0, ${h_graphs - margin_graphs.top - margin_graphs.bottom})`)
+            .attr("transform", `translate(0, ${h_graphs2 - margin_graphs2.top - margin_graphs2.bottom})`)
             .call(d3.axisBottom(x_graphs).ticks(5))
             ;
         
         svgGroup.append("g")
             .attr("class", "y axis")
-            .call(d3.axisLeft(y_graphs).ticks(5).tickFormat(d => parseInt(d)).tickSizeInner([-(h_graphs)]));
+            .call(d3.axisLeft(y_graphs).ticks(5).tickFormat(d => parseInt(d)).tickSizeInner([-(h_graphs2)]));
 
         svgGroup.selectAll('rect')
             .data(data)
@@ -123,7 +127,7 @@ const displayGraph2 = (fileName, attributeAccessor, svgGroup, parentDiv, color, 
             .attr('y', d => y_graphs(d.number))
             .attr('width', x_graphs.bandwidth())
             .attr('x', d => x_graphs(d.type))
-            .attr('height', d => h_graphs - margin_graphs.top - margin_graphs.bottom - y_graphs(d.number))
+            .attr('height', d => h_graphs2 - margin_graphs2.top - margin_graphs2.bottom - y_graphs(d.number))
             .on("mouseover", function(d){
                 d3.select(this)
                     .transition()
@@ -131,8 +135,8 @@ const displayGraph2 = (fileName, attributeAccessor, svgGroup, parentDiv, color, 
                     .style('fill', color)
 
                 tooltip
-                    .style("left",d3.select(this).attr("x")+5 + "px")
-                    .style("top",d3.select(this).attr("y") + "px")
+                    .style("left", d3.event.pageX - 450 + "px")
+                    .style("top", d3.event.pageY - 550 + "px")
                     .style("display", "inline-block")
                     .html((d.type) + "<br>" + (d.number) + " complaints");
             })

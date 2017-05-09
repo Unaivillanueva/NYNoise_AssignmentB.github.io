@@ -100,7 +100,7 @@
     <article>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="col-md-6 col-md-offset-3">
                     <h2 class="section-heading" id="motivation">Our motivation</h2>
                     <p>New York city has been for a long time called "The city that never sleeps". Some say that this is due to its incredible night life, the fact the subways don't close at night or because even at 3am you can still take a ferry around the New York Harbor. However, the city has also received numerous noise pollution complaints to the Department of Environmental Pollution during the past years. With this information we wondered if the reason why there are some many people around at any time is because the city doesn't let them sleep. In this page, we are going to analyse the different reasons why people complain about noise, where those happen and see if there any interesting facts around the noise in New York city.</p>
 
@@ -111,16 +111,16 @@
                      <h2 class="section-heading" id="understanting">Understanding the data</h2>
                      <p>Let's start by visualizing some of the basic stats of our data.</p>
                      <h3>Why do people complain?</h3>
-                     <div class="row-full">
-                        <div id="v_types_complaints" class="col-lg-6"></div>
-                        <div id="v_zones_complaints" class="col-lg-6"></div>
-                     </div>
+                     
+                        <div id="v_types_complaints" ></div>
+                        <div id="v_zones_complaints" ></div>
+                     
                      <p>Taking a look at some basics stats it can be easily seen that some noise types are by far more usual than others. This is the case for construction noises in its two different categories. There is also a significant amount of complaints pointing at barking dogs. The rest of the types have significantly lower occurrences. However, as it will shown later, the origin of some of these complaints like Alarms is important and can be originated from only one source.</p>
                      <p>Regarding the number of complaints distributed by street some interesting things begin to show up. The main source is Union Turnpike, a street located in Queens. This is quite an interesting fact taking into account that most of the rest of the streets here are located in the center of Manhattan.</p>
-                     <div class="row-full">
-                        <div id="v_time_complaints" class="col-lg-6"></div>
-                        <div id="v_month_complaints" class="col-lg-6"></div>
-                     </div>
+                     
+                        <div id="v_time_complaints" ></div>
+                        <div id="v_month_complaints" ></div>
+                     
                      <p>Talk about cycles when done</p>
 
                      
@@ -146,7 +146,7 @@
                     
                     <p>Exploring the data in more detail reveals that all of the complaints come from a single address in Union Turnpike that correspond to the <a href="http://www.firedepartment.net/directory/new-york/queens-county/flushing/new-york-fire-department-engine-315-ladder-125-queens">Fire Brigade</a> in that street.</p>
                     
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m0!3m2!1ses!2sdk!4v1493568503154!6m8!1m7!1spKOPmViUIpKDB7aVg3d8_A!2m2!1d40.72034449049819!2d-73.8078764853647!3f141.80003234336525!4f-5.680241702150838!5f0.7820865974627469" width="800" height="600" frameborder="0" style="border:0; margin-left: -30px;" allowfullscreen></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m0!3m2!1ses!2sdk!4v1493568503154!6m8!1m7!1spKOPmViUIpKDB7aVg3d8_A!2m2!1d40.72034449049819!2d-73.8078764853647!3f141.80003234336525!4f-5.680241702150838!5f0.7820865974627469" width="800" height="600" frameborder="0" style="border:0; margin-left: 30px;" allowfullscreen></iframe>
                     
                     <p>After analyzing the surroundings of the fire brigade we observed that there are a few interesting buildings around it, such as two medical facilities. Since trying to obtain any relevant information in news, articles of supporting data regarding these complaints was quite difficult we decided to contact some of the companies and shops in the surrounding buildings by phone. Unfortunately they couldn't provide any insights on these complaints and most of them seemed unaware of them happening.</p>
                     <p> In conclusion, we can't really know if the huge number of noise pollution complaints are based on something that actually happened, or it's just something that is wrong with the data we used. However, due to the difficulty to find any relevant news, supporting data or information when contacting the surrounding buildings we are inclined to think that it is in fact corrupt data.</p>
@@ -157,38 +157,43 @@
                     <button class='but1_neig' onclick="document.getElementById('map1').src='KNN5.png'">k=5</button>
                     <button class='but1_neig'onclick="document.getElementById('map1').src='KNN10.png'">k=10</button>
                     <button class='but1_neig'onclick="document.getElementById('map1').src='KNN30.png'">k=30</button>
-                    <img id='map1' align="left" src='KNN5.png' style="width: 900px; height: 700px; margin-top: 30px; margin-bottom: 30px; margin-left: -100px; "></img>
+                    <img id='map1' align="left" src='KNN5.png' style="width: 900px; height: 700px; margin-top: 10px; margin-bottom: 80px; margin-left: 0px; "></img>
              
 
-                     <div id='controls'>
+                     <div id='controls' style="clear: both">
                         <button class="kmeans_but" data-val='2'>k = 2</button>
                         <button class="kmeans_but" data-val='3'>k = 3</button>
                         <button class="kmeans_but" data-val='4'>k = 4</button>
                         <button class="kmeans_but" data-val='5'>k = 5</button>
                         <button class="kmeans_but" data-val='6'>k = 6</button>
                     </div>
-                    <div id='v_map3' style="margin-left: -150px; margin-top: 30px;"></div>
+                    <div id='v_map3' style="margin-left: 0px; margin-top: 30px; clear: both;"></div>
 
-                    <div id='v_map2' style="margin-left: -150px; margin-top: 30px;"></div>
+                    <div id='v_map2' style="margin-left: 0px; margin-top: 30px;"></div>
 
                     <p>However, using a K Neighbours model might not be the best option in this case. Therefore, we have tried and evaluated different models and compared their scores.</p>
                     <p>Select the train/test split you want to see:</p>
                     <!--buttons for the score graph-->
-                    <button id="button8020" class="myButton">80/20</button>
-                    <button id="button9010" class="myButton">90/10</button>
-                    <button id="button9505" class="myButton">95/05</button>
+                    <button id="button8020" class="myButton">80% - 20%</button>
+                    <button id="button9010" class="myButton">90% - 10%</button>
+                    <button id="button9505" class="myButton">95/ - 5%</button>
 
                     <div id='v_scores' style="width: 900px; height: 500px; margin-top: 30px; margin-bottom: 50px; margin-left: 0px; "> 
                     
                     </div>                
                     
-                    <p>It is interesting to see that none of the model give a great accuracy even with different train/test percentages and train features. The highest one we can obtain is a 54.86% accuracy using a Decision Tree and only the street name as a train feature. this is probably due to the fact that our data isn't big or varied enought to contemplate all the different possibilities.</p>
+                    <p>It is interesting to see that none of the models give a great accuracy, even with different train/test percentages and train features. The highest one we can obtain is a 54.86% accuracy using a Decision Tree and only the street name as a train feature. This is probably due to the fact that our data isn't big or varied enough to contemplate all the different possibilities.</p>
 
-                   <h3>ANYTHING ELSE?</h3>
+                   <h3 style="margin-bottom: 100px;">Thank you for reading!</h3>
 
-
-
-
+                   <h3>Appendix</h3>
+                   <h4>Links:</h4>
+                   <ul>
+                   <li><a href="https://data.cityofnewyork.us/Social-Services/Noise-SRs-since-20151101/fqi4-uxkk">NY Noise Data</a>
+                   <li><<a href="https://nbviewer.jupyter.org/github/socialdataassignment2/NYNoise_AssignmentB.github.io/blob/master/Project%20Assignment%20B.ipynb">iPython Notebook</a>
+                   <li><a href="https://github.com/socialdataassignment2/NYNoise_AssignmentB.github.io">Github Repository</a>
+                   <li><a href="https://www.youtube.com/watch?v=MOyzHlfgapE">Project Assignment A Video</a>
+                   </ul>
                 </div>
             </div>
         </div>
@@ -201,7 +206,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <p class="copyright text-muted">Copyright &copy; Us, 2017</p>
+                    <p class="copyright text-muted">02806 Social Data Analysis and Visualization, 2017</p>
                 </div>
             </div>
         </div>

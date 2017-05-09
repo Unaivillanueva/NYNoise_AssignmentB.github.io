@@ -1,5 +1,5 @@
-const w = 1300,
-      h = 700;
+const w = 1000,
+      h = 500;
 const legendWidth = w * 0.6,
       legendHeight = 50;
 const n_buckets = 5;

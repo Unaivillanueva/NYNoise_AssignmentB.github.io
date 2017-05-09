@@ -1,6 +1,6 @@
 var margin = {top: 10, right: 0, bottom: 30, left: 30};
-var width = 700;
-var height = 400;
+var width = 900;
+var height = 500;
 
 var svg_scores = d3.select("div#v_scores").append("svg")
     .attr("width", width + margin.left + margin.right)
